@@ -56,11 +56,12 @@
  * @constructor
  * @implements storeLocator_Store
  */
-storeLocator.Store = function(id, location, features, props) {
+storeLocator.Store = function(id, location, features, props, options) {
   this.id_ = id;
   this.location_ = location;
   this.features_ = features || storeLocator.FeatureSet.NONE;
   this.props_ = props || {};
+  this.fields_ = options.fields;
 };
 storeLocator['Store'] = storeLocator.Store;
 
@@ -172,7 +173,7 @@ storeLocator.Store.prototype.generateFeaturesHTML_ = function() {
   var featureList = this.features_.asList();
   for (var i = 0, feature; feature = featureList[i]; i++) {
     html.push('<li>');
-    html.push(feature.getDisplayName());
+    html.push(feature.getPreferredProperty());
     html.push('</li>');
   }
   html.push('</ul>');
@@ -186,7 +187,7 @@ storeLocator.Store.prototype.generateFeaturesHTML_ = function() {
 storeLocator.Store.prototype.getInfoWindowContent = function() {
   if (!this.content_) {
     // TODO(cbro): make this a setting?
-    var fields = ['title', 'address', 'phone', 'misc', 'web'];
+    var fields = this.fields_ || ['title', 'address', 'phone', 'misc', 'web'];
     var html = ['<div class="store">'];
     html.push(this.generateFieldsHTML_(fields));
     html.push(this.generateFeaturesHTML_());

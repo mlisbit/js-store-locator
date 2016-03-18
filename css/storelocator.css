@@ -92,6 +92,10 @@
   padding-right: 0.8em;
 }
 
+.store .features li img{
+  width: 60px;
+}
+
 .store .web a {
   color: green
 }

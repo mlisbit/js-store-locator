@@ -30,9 +30,11 @@
  * @constructor
  * @implements storeLocator_Feature
  */
-storeLocator.Feature = function(id, name) {
-  this.id_ = id;
-  this.name_ = name;
+storeLocator.Feature = function(id, name, options) {
+  this.id_    = id;
+  this.name_  = name;
+  this.img_   = options.img;
+  this.prefferedProperty_ = options.prefferedProperty || 'name';
 };
 storeLocator['Feature'] = storeLocator.Feature;
 
@@ -51,6 +53,22 @@ storeLocator.Feature.prototype.getId = function() {
 storeLocator.Feature.prototype.getDisplayName = function() {
   return this.name_;
 };
+
+/**
+ * Gets this Feature's image.
+ * @return {string} this feature's image.
+ */
+storeLocator.Feature.prototype.getImage = function() {
+  return '<img src=' + this.img_ + '>';
+};
+
+storeLocator.Feature.prototype.getPreferredProperty = function() {
+  if (this.prefferedProperty_ === 'img') {
+    return this.getImage();
+  }
+  return this.getDisplayName();
+};
+
 
 storeLocator.Feature.prototype.toString = function() {
   return this.getDisplayName();
