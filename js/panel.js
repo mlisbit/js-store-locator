@@ -379,14 +379,21 @@ storeLocator.Panel.prototype.selectedStore_changed = function() {
   if (this.settings_['directions']) {
     this.directionsPanel_.find('.directions-to')
       .val(store.getDetails().title);
-  }
 
-  var node = that.get('view').getInfoWindow().getContent();
-  var directionsLink = $('<a/>')
+    var directionsLink = $('<a/>')
                           .text('Directions')
                           .attr('href', '#')
                           .addClass('action')
                           .addClass('directions');
+
+    directionsLink.click(function() {
+      that.showDirections();
+      return false;
+    });
+  }
+
+  var node = that.get('view').getInfoWindow().getContent();
+
 
   // TODO(cbro): Make these two permanent fixtures in InfoWindow.
   // Move out of Panel.
@@ -402,10 +409,7 @@ storeLocator.Panel.prototype.selectedStore_changed = function() {
                           .addClass('action')
                           .addClass('streetview');
 
-  directionsLink.click(function() {
-    that.showDirections();
-    return false;
-  });
+
 
   zoomLink.click(function() {
     that.get('view').getMap().setOptions({
@@ -420,7 +424,7 @@ storeLocator.Panel.prototype.selectedStore_changed = function() {
     streetView.setVisible(true);
   });
 
-  $(node).append(directionsLink).append(zoomLink).append(streetViewLink);
+  $(node).append(zoomLink).append(streetViewLink) && $(node).append(directionsLink);
 };
 
 /**
