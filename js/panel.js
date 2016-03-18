@@ -409,6 +409,23 @@ storeLocator.Panel.prototype.selectedStore_changed = function() {
                           .addClass('action')
                           .addClass('streetview');
 
+  var storeWebsite = store.props_['website'];
+  var storeEmail = store.props_['email'];
+
+  if (storeWebsite) {
+    var websiteLink = $('<a/>')
+                        .text('Website')
+                        .attr('href', 'http://'+storeWebsite)
+                        .attr('target', '_blank')
+                        .addClass('action')
+  }
+
+  if (storeEmail) {
+    var emailLink = $('<a/>')
+                      .text(storeEmail)
+                      .attr('href', 'mailto:'+storeEmail)
+                      .addClass('action')
+  }
 
 
   zoomLink.click(function() {
@@ -424,7 +441,10 @@ storeLocator.Panel.prototype.selectedStore_changed = function() {
     streetView.setVisible(true);
   });
 
+
   $(node).append(zoomLink).append(streetViewLink) && $(node).append(directionsLink);
+  $(node).append(websiteLink);
+  $(node).append(emailLink);
 };
 
 /**

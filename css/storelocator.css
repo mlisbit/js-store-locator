@@ -103,5 +103,6 @@
 .store .action {
   font-size: 0.8em;
   color: green;
+  margin-top: 5px;
   margin-right: 0.5em;
 }
