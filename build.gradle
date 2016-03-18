@@ -2,15 +2,15 @@ plugins {
   id "com.eriwen.gradle.js" version "1.12.1"
 }
 
-javascript.source {
-  prod.js {
-    srcDir "js"
-    include "*.js"
-  }
-}
-
 minifyJs {
-  source = javascript.source.prod.js
+  source = ["${projectDir}/js/common.js",
+            "${projectDir}/js/feature.js",
+            "${projectDir}/js/featureset.js",
+            "${projectDir}/js/gme-datasource.js",
+            "${projectDir}/js/panel.js",
+            "${projectDir}/js/static-datasource.js",
+            "${projectDir}/js/store.js",
+            "${projectDir}/js/view.js"]
   dest = file("${buildDir}/store-locator.unwrapped.min.js")
   closure.externs = fileTree(dir: "externs") + files("exports.js")
 }
