@@ -290,7 +290,6 @@ storeLocator.View.prototype.clearMarkers = function() {
  */
 storeLocator.View.prototype.refreshView = function() {
   var that = this;
-
   this.data_.getStores(this.getMap().getBounds(),
       /** @type {storeLocator.FeatureSet} */ (this.get('featureFilter')),
       function(stores) {

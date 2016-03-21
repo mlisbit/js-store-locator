@@ -28,7 +28,7 @@
  * var container = document.getElementById('panel');
  * var panel = new storeLocator.Panel(container, {
  *   view: view,
- *   locationSearchLabel: 'Location:'
+ *   locationSearchLabel: 'Location:'this
  * });
  * google.maps.event.addListener(panel, 'geocode', function(result) {
  *   geocodeMarker.setPosition(result.geometry.location);
@@ -69,7 +69,7 @@ storeLocator.Panel.prototype = new google.maps.MVCObject;
 storeLocator.Panel.prototype.init_ = function() {
   var that = this;
   this.itemCache_ = {};
-
+  console.log(this);
   if (this.settings_['view']) {
     this.set('view', this.settings_['view']);
   }
@@ -168,6 +168,7 @@ storeLocator.Panel.prototype.init_ = function() {
  */
 storeLocator.Panel.prototype.toggleFeatureFilter_ = function(feature) {
   var featureFilter = this.get('featureFilter');
+  console.log(featureFilter);
   featureFilter.toggle(feature);
   this.set('featureFilter', featureFilter);
 };
